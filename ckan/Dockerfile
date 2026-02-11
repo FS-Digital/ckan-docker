@@ -1,19 +1,25 @@
 FROM ckan/ckan-base:2.11
 
-# ### Install Scheming Extension ###
+# 1. Switch to root to install extensions and modify files
+USER root
+
+# 2. Install Scheming Extension
 RUN pip3 install -e 'git+https://github.com/ckan/ckanext-scheming.git@master#egg=ckanext-scheming'
 
-# ### Copy the Stockton Schema into the image ###
-# Ensure stockton_schema.json is in the 'ckan' folder alongside this Dockerfile before deploying,
-# or update the path below to match where it is relative to the build context.
+# 3. Copy the Schema file
+# We ensure the parent directory exists and change ownership to the ckan user
 COPY stockton_schema.json /srv/app/schemas/stockton_schema.json
+RUN chown ckan:ckan /srv/app/schemas/stockton_schema.json
+
+# --- Existing Configuration below ---
 
 # Copy custom initialization scripts
 COPY --chown=ckan-sys:ckan-sys docker-entrypoint.d/* /docker-entrypoint.d/
 
-# Apply any patches needed
+# Apply any patches needed to CKAN core or any of the built extensions
 COPY --chown=ckan-sys:ckan-sys patches ${APP_DIR}/patches
 
+# 4. Switch back to ckan user for runtime security
 USER ckan
 
 RUN for d in $APP_DIR/patches/*; do \
