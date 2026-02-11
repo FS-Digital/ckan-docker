@@ -7,11 +7,9 @@ USER root
 RUN pip3 install -e 'git+https://github.com/ckan/ckanext-scheming.git@master#egg=ckanext-scheming'
 
 # 3. Copy the Schema file
-# We ensure the parent directory exists and change ownership to the ckan user
+# FIX: Using 'chown ckan' (without :ckan) to avoid invalid group error
 COPY stockton_schema.json /srv/app/schemas/stockton_schema.json
-RUN chown ckan:ckan /srv/app/schemas/stockton_schema.json
-
-# --- Existing Configuration below ---
+RUN chown ckan /srv/app/schemas/stockton_schema.json
 
 # Copy custom initialization scripts
 COPY --chown=ckan-sys:ckan-sys docker-entrypoint.d/* /docker-entrypoint.d/
