@@ -11,16 +11,16 @@
       "form_placeholder": "e.g. Health and Retirement Study"
     },
     {
-      "field_name": "name",
-      "label": "URL Slug",
-      "preset": "dataset_slug",
-      "form_placeholder": "e.g. health-retirement-study"
-    },
-    {
       "field_name": "notes",
       "label": "Short Description",
       "form_placeholder": "A brief summary of the dataset's purpose...",
       "preset": "markdown"
+    },
+    {
+      "field_name": "keywords",
+      "label": "Keywords",
+      "preset": "multiple_text",
+      "form_placeholder": "Add keywords to help users find this dataset."
     },
     {
       "field_name": "impact_factor",
@@ -50,13 +50,19 @@
       "form_placeholder": "e.g. 65-85"
     },
     {
+      "field_name": "location",
+      "label": "Location",
+      "form_snippet": "text.html",
+      "display_snippet": "text.html",
+      "form_placeholder": "e.g. United States"
+    },
+    {
        "field_name": "domain_name",
        "label": "Content Domain",
        "preset": "select",
        "choices": [
-         { "value": "mental_health", "label": "Mental Health" },
-         { "value": "cognitive_training", "label": "Cognitive Training" },
-         { "value": "financial_knowledge", "label": "Financial Knowledge" }
+         { "value": "well-being", "label": "Well Being" },
+          { "value": "alzheimer", "label": "Alzheimer's Disease" }
        ]
     },
     {
@@ -70,17 +76,6 @@
       "field_name": "url",
       "label": "URL",
       "preset": "resource_url_upload"
-    },
-    {
-      "field_name": "name",
-      "label": "Name",
-      "form_placeholder": "eg. January 2011 Gold Prices"
-    },
-    {
-      "field_name": "description",
-      "label": "Description",
-      "form_snippet": "markdown.html",
-      "form_placeholder": "Some useful notes about the data"
     },
     {
       "field_name": "format",
